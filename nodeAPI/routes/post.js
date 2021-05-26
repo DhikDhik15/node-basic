@@ -4,7 +4,7 @@ const postControllers = require('../controllers/post')
 const router = express.Router()
 
 router.get('/', postControllers.getPost)
-
+router.post('/post', postControllers.createPost)
 
 module.exports = router;
 

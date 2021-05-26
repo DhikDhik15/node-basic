@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const morgan = require('morgan')
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 const postRoutes = require('./routes/post')
 // const myMiddleware = (req, res, next) => {
@@ -14,7 +15,7 @@ dotenv.config()
 //db connection
 mongoose.connect(
     process.env.MONGO_URI, {
-      useNewUrlParser: true
+      useNewUrlParser: true,
     }
   )
   .then(() => console.log('DB Connected'))
@@ -34,6 +35,7 @@ mongoose.connection.on('error', err => {
 /*3. LESSON (MIDDLEWARE)*/
 app.use(morgan('dev'));
 //app.use(myMiddleware);
+app.use(bodyParser.json());
 
 app.use("/", postRoutes);
 
